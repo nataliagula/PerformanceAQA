@@ -1,0 +1,12 @@
+{
+  "yaml.schemas": {
+    "https://www.artillery.io/schema.json": [
+      "file:///c%3A/Users/Lenovo/Desktop/PerformanceAQA%2024.01.2024/PerformanceAQA/csv-test.yml",
+      "file:///c%3A/Users/Lenovo/Desktop/PerformanceAQA%2024.01.2024/PerformanceAQA/firstTest.yml",
+      "file:///c%3A/Users/Lenovo/Desktop/PerformanceAQA%2024.01.2024/PerformanceAQA/load-test.yml",
+      "file:///c%3A/Users/Lenovo/Desktop/PerformanceAQA%2024.01.2024/PerformanceAQA/spike-test.yml",
+      "file:///c%3A/Users/Lenovo/Desktop/PerformanceAQA%2024.01.2024/PerformanceAQA/stress-test.yml",
+      "file:///c%3A/Users/Lenovo/Desktop/PerformanceAQA%2024.01.2024/PerformanceAQA/new-test.yml"
+    ]
+  }
+}

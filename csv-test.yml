@@ -1,0 +1,37 @@
+config:
+  target: https://httpbin.org/
+  phases:
+    - duration: 1
+      arrivalRate: 1
+      name: Arrtilery First Test
+  payload:
+    - path: "keywords.csv"
+      fields:
+        - "keyword1"
+        - "keyword2"
+      order: sequence
+  plugins:
+    ensure: {}
+  ensure:
+    thresholds:
+      - http.response_time.p95: 1000
+    conditions:
+      - expression: vusers.failed == 0
+      - expression: "http.request_rate >= 2 and http.response_time.max < 200"
+scenarios:
+  - name: Getting a resource
+    flow:
+      - get:
+          url: "{{ target }}get"
+      - post:
+          url: "{{ target }}post"
+          json:
+            username: " {{ keyword1 }}"
+            password: "Temp Password"
+          capture:
+            - json: "$.json"
+              as: "request_body"
+            - json: "$.headers.Host"
+              as: "host"
+      - log: "Keyword1: {{ keyword1 }}"
+      - log: "Keyword2: {{ keyword2 }}"

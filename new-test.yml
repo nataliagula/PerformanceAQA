@@ -1,0 +1,35 @@
+config:
+  target: "https://dukengn.github.io"
+  phases:
+    - duration: 60
+      arrivalRate: 10
+  metrics:
+    - name: "latency"
+      type: "percentiles"
+      data: { p95: "latency.p95", p99: "latency.p99" }
+    - name: "success_rate"
+      type: "counter"
+      data: { success: "http_req_duration", total: "http_reqs" }
+    - name: "http_errors"
+      type: "counter"
+      data: { errors: "http_req_duration", total: "http_reqs" }
+
+scenarios:
+  - flow:
+      - get:
+          url: "/Dog-facts-API/"
+          capture:
+            - json: "$.facts[0]"
+              as: "fact"
+      - post:
+          url: "/post"
+          headers:
+            Content-Type: "application/json"
+          json:
+            fact: "{{ fact }}"
+
+// TARGET - określa podstawowy URL interfejsu API,
+  Sekcja faz definiuje scenariusz testu obciążenia z pojedynczą fazą trwającą 60 sekund i szybkością nadejścia 10 żądań na sekundę.
+  Sekcja metryk definiuje metryki, które mają być gromadzone, w tym metryki opóźnienia (p95, p99), współczynnik powodzenia i błędy HTTP.
+  Sekcja scenariuszy definiuje przepływ żądań do wykonania w trakcie testu. Zawiera żądanie GET w celu pobrania faktu o psie i żądanie POST 
+  w celu opublikowania tego faktu.
